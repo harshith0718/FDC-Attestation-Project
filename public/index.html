@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FDC Attestation Demo</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="app-header fade-in">
+      <div class="logo-orbit">
+        <span class="logo-dot"></span>
+      </div>
+      <div class="title-block">
+        <h1>FDC Attestation</h1>
+        <p>Create Merkle-based attestations from your transaction data.</p>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="card slide-up" id="input-card">
+        <h2>1. Transactions JSON</h2>
+        <p class="help-text">Paste an array of transaction objects. Each object can have <code>amount</code>, <code>category</code>, etc.</p>
+        <textarea id="transactions-input" spellcheck="false"></textarea>
+        <div class="card-actions">
+          <button id="btn-sample" class="btn ghost">Load sample</button>
+          <button id="btn-attest" class="btn primary">Generate attestation</button>
+        </div>
+        <p id="input-error" class="error-text"></p>
+      </section>
+
+      <section class="card slide-up delay-1" id="summary-card">
+        <h2>2. Snapshot summary</h2>
+        <div id="summary-content" class="placeholder">No snapshot yet.</div>
+      </section>
+
+      <section class="card slide-up delay-2" id="root-card">
+        <h2>3. Merkle root & proofs</h2>
+        <div id="root-content" class="placeholder">Run an attestation to see the Merkle root.</div>
+      </section>
+
+      <section class="card slide-up delay-2" id="gasless-card">
+        <h2>4. Gasless attestation (relayed)</h2>
+        <p class="help-text">Paste the ABI-encoded request and signing details to simulate a gasless submit via the backend relayer.</p>
+
+        <label class="field-label" for="gasless-abi">ABI encoded request</label>
+        <textarea id="gasless-abi" class="small" spellcheck="false" placeholder="0x..."></textarea>
+
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label" for="gasless-address">User address</label>
+            <input id="gasless-address" type="text" placeholder="0xYourUserAddress" />
+          </div>
+          <div class="field">
+            <label class="field-label" for="gasless-nonce">Nonce</label>
+            <input id="gasless-nonce" type="number" min="0" placeholder="0" />
+          </div>
+        </div>
+
+        <label class="field-label" for="gasless-signature">Signature</label>
+        <textarea id="gasless-signature" class="small" spellcheck="false" placeholder="0xSignature"></textarea>
+
+        <div class="card-actions">
+          <button id="btn-gasless" class="btn primary">Submit gasless request</button>
+        </div>
+        <p id="gasless-error" class="error-text"></p>
+
+        <div id="gasless-result" class="code-block" style="margin-top: 8px; min-height: 40px;">
+          <span class="placeholder">No gasless transaction submitted yet.</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
